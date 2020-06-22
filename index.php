@@ -15,9 +15,6 @@ try {
     if (strtoupper($_SERVER['REQUEST_METHOD'] != 'POST')) {
         throw new Exception("Received non-post request on webhook handler");
     }
-    file_put_contents("post.json", json_encode($_POST, JSON_PRETTY_PRINT));
-    $request = json_decode(file_get_contents('php://input'), true);
-    file_put_contents("payload.json", json_encode($request, JSON_PRETTY_PRINT));
 
     if (json_last_error() != JSON_ERROR_NONE) {
         $em = "Error while parsing payload: ".json_last_error_msg();
@@ -51,21 +48,10 @@ try {
 }
 
 /**
- * Processes thrown exception while processing the payload
- * 
- * @param $e \Exception
- * 
- * @return void
- */
-function handleException($e) 
-{
-    notifyOnSlack($e->getMessage());
-}
-
-/**
  * Sends message to Slack
  * 
- * @param $message string
+ * @param string $message message to be sent
+ * @param bool $markdown specifies if the message should be sent as markdown formatted
  * 
  * @return void
  */

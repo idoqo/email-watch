@@ -2,7 +2,6 @@
     "require": {
         "bref/bref": "^0.5.27",
         "vlucas/phpdotenv": "^5.0",
-        "sendgrid/sendgrid": "^7.6",
         "ext-json": "*",
         "nexylan/slack": "^3.1",
         "php-http/discovery": "^1.8"
