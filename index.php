@@ -15,11 +15,6 @@ try {
     if (strtoupper($_SERVER['REQUEST_METHOD'] != 'POST')) {
         throw new Exception("Received non-post request on webhook handler");
     }
-
-    if (json_last_error() != JSON_ERROR_NONE) {
-        $em = "Error while parsing payload: ".json_last_error_msg();
-        throw new Exception($em);
-    }
     
     $from = $_POST['from'];
     $to = $_POST['to'];
